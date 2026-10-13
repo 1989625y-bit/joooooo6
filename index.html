@@ -1,0 +1,1879 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>嚴幼喬 (帥哥) | 新艾利都 2D 乞討繪師 | ZZZ Style Portfolio</title>
+  <meta name="description" content="新艾利都 2D 繪師兼傳奇街頭乞丐——帥哥嚴幼喬的個人作品集與繩網委託終端。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,500;0,700;1,700&family=Noto+Sans+TC:wght@400;500;700;900&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ==========================================================================
+       ZENLESS ZONE ZERO (ZZZ) RESTRUCTURED UI DESIGN SYSTEM
+       CLIENT: 嚴幼喬 (帥哥) // 2D 乞討繪師
+       ========================================================================== */
+
+    :root {
+      --bg-main: #0c0d12;
+      --bg-panel: #13151f;
+      --bg-panel-alt: #181b27;
+      --bg-card: #1c2030;
+      
+      --zzz-yellow: #e8ff00;
+      --zzz-yellow-glow: rgba(232, 255, 0, 0.35);
+      --zzz-cyan: #00f5d4;
+      --zzz-cyan-glow: rgba(0, 245, 212, 0.3);
+      --zzz-red: #ff3355;
+      
+      --text-white: #ffffff;
+      --text-gray: #a6adbb;
+      --text-muted: #646b7d;
+      
+      --border-subtle: rgba(255, 255, 255, 0.1);
+      --border-bright: rgba(232, 255, 0, 0.4);
+
+      --font-display: 'Syne', 'Noto Sans TC', sans-serif;
+      --font-tech: 'Chakra Petch', monospace;
+      --font-body: 'Noto Sans TC', sans-serif;
+
+      --skew-deg: -8deg;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--bg-main);
+      color: var(--text-white);
+      font-family: var(--font-body);
+      overflow-x: hidden;
+    }
+
+    body {
+      background: radial-gradient(circle at 50% 10%, #151824 0%, var(--bg-main) 70%);
+      min-height: 100vh;
+      line-height: 1.6;
+      position: relative;
+    }
+
+    /* CRT Scanline Effect (Toggleable) */
+    .crt-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 9999;
+      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+      background-size: 100% 3px;
+      opacity: 0.65;
+      transition: opacity 0.2s ease;
+    }
+    body:not(.crt-enabled) .crt-overlay {
+      opacity: 0;
+    }
+
+    /* Top Subtle Hazard Line */
+    .hazard-stripe-top {
+      background: repeating-linear-gradient(
+        -45deg,
+        var(--zzz-yellow),
+        var(--zzz-yellow) 10px,
+        #111116 10px,
+        #111116 20px
+      );
+      height: 6px;
+      width: 100%;
+      position: sticky;
+      top: 0;
+      z-index: 1001;
+    }
+
+    /* ==========================================================================
+       TOP STATUS HUD BAR
+       ========================================================================== */
+    .hud-bar {
+      position: sticky;
+      top: 6px;
+      z-index: 1000;
+      background: rgba(15, 17, 24, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .hud-bar-container {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 0.6rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .hud-left {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+
+    .zzz-badge {
+      background: var(--zzz-yellow);
+      color: #000;
+      font-family: var(--font-tech);
+      font-weight: 900;
+      font-size: 1.1rem;
+      padding: 0.15rem 0.5rem;
+      transform: skewX(var(--skew-deg));
+      box-shadow: 2px 2px 0px #000;
+      letter-spacing: -1px;
+    }
+
+    .hud-proxy-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .hud-id {
+      font-family: var(--font-tech);
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      letter-spacing: 1px;
+    }
+
+    .hud-name {
+      font-weight: 700;
+      font-size: 1rem;
+      color: #fff;
+    }
+
+    .hud-name span {
+      color: var(--zzz-yellow);
+      font-size: 0.8rem;
+      margin-left: 0.3rem;
+    }
+
+    .hud-right {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .hud-stat-pill {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      font-family: var(--font-tech);
+      font-size: 0.75rem;
+      padding: 0.25rem 0.65rem;
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .pill-red {
+      color: var(--zzz-red);
+      border-color: rgba(255, 51, 85, 0.3);
+    }
+
+    .pill-yellow {
+      color: var(--zzz-yellow);
+      border-color: rgba(232, 255, 0, 0.3);
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.15s ease;
+    }
+
+    .pill-yellow:hover {
+      background: var(--zzz-yellow);
+      color: #000;
+      transform: translateY(-1px);
+    }
+
+    .hud-btn {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border-subtle);
+      color: #fff;
+      font-family: var(--font-tech);
+      font-size: 0.75rem;
+      padding: 0.25rem 0.6rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .hud-btn:hover {
+      background: var(--zzz-cyan);
+      color: #000;
+      border-color: var(--zzz-cyan);
+    }
+
+    /* ==========================================================================
+       CHANNEL TAB NAVIGATION (CLEAN MODULARITY)
+       ========================================================================== */
+    .channel-nav-container {
+      max-width: 1300px;
+      margin: 1.25rem auto 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .channel-tabs {
+      display: flex;
+      gap: 0.5rem;
+      background: #11131a;
+      border: 1px solid var(--border-subtle);
+      padding: 0.4rem;
+      overflow-x: auto;
+    }
+
+    .tab-btn {
+      flex: 1;
+      min-width: 140px;
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-gray);
+      font-family: var(--font-tech);
+      font-weight: 700;
+      font-size: 0.85rem;
+      padding: 0.65rem 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      transform: skewX(var(--skew-deg));
+      transition: all 0.15s ease;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .tab-num {
+      color: var(--zzz-yellow);
+      font-size: 0.75rem;
+    }
+
+    .tab-btn:hover, .tab-btn.active {
+      background: var(--zzz-yellow);
+      color: #000;
+      border-color: var(--zzz-yellow);
+      box-shadow: 2px 2px 0px #fff;
+    }
+
+    .tab-btn.active .tab-num {
+      color: #000;
+    }
+
+    /* ==========================================================================
+       CONTAINER & SECTION ARCHITECTURE
+       ========================================================================== */
+    .main-wrapper {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 5rem 1.5rem;
+    }
+
+    .content-block {
+      background: var(--bg-panel);
+      border: 1px solid var(--border-subtle);
+      margin-bottom: 3.5rem;
+      position: relative;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .content-block::before {
+      content: "";
+      position: absolute;
+      top: -1px;
+      left: 20px;
+      width: 60px;
+      height: 3px;
+      background: var(--zzz-yellow);
+    }
+
+    .block-header {
+      padding: 1.25rem 2rem;
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.2);
+    }
+
+    .block-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .block-tag {
+      background: var(--zzz-yellow);
+      color: #000;
+      font-family: var(--font-tech);
+      font-weight: 800;
+      font-size: 0.75rem;
+      padding: 0.15rem 0.5rem;
+      transform: skewX(var(--skew-deg));
+    }
+
+    .block-title {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: 0.5px;
+    }
+
+    .block-code {
+      font-family: var(--font-tech);
+      font-size: 0.75rem;
+      color: var(--zzz-cyan);
+    }
+
+    .block-body {
+      padding: 2.25rem 2rem;
+    }
+
+    /* ==========================================================================
+       SECTION 1: HERO / AGENT PROFILE OVERVIEW
+       ========================================================================== */
+    .profile-grid {
+      display: grid;
+      grid-template-columns: 380px 1fr;
+      gap: 2.5rem;
+      align-items: start;
+    }
+
+    /* Left Poster Card */
+    .agent-card-wrap {
+      perspective: 1000px;
+    }
+
+    .agent-card {
+      background: #11131a;
+      border: 2px solid #fff;
+      padding: 0.75rem;
+      box-shadow: 10px 10px 0px var(--zzz-yellow), 0 15px 30px rgba(0,0,0,0.6);
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.15s ease-out;
+    }
+
+    .agent-img-box {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+      background: #000;
+      position: relative;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .agent-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .agent-card:hover .agent-img {
+      transform: scale(1.04);
+    }
+
+    .agent-card-footer {
+      margin-top: 0.75rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-tech);
+      font-size: 0.75rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 0.5rem;
+    }
+
+    .rank-badge {
+      background: var(--zzz-red);
+      color: #fff;
+      font-weight: 800;
+      padding: 0.1rem 0.4rem;
+    }
+
+    /* Right Dossier Information */
+    .dossier-info {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .dossier-headline {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .dossier-subtitle {
+      font-family: var(--font-tech);
+      font-size: 0.85rem;
+      color: var(--zzz-cyan);
+      letter-spacing: 2px;
+      font-weight: 700;
+    }
+
+    .dossier-name {
+      font-family: var(--font-display);
+      font-size: 3.2rem;
+      font-weight: 900;
+      line-height: 1.1;
+      color: #fff;
+      text-shadow: 2px 2px 0px #000;
+    }
+
+    .dossier-name span {
+      font-size: 1.5rem;
+      color: var(--zzz-yellow);
+      font-family: var(--font-tech);
+      font-weight: 700;
+      margin-left: 0.5rem;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.25rem;
+    }
+
+    .tag-chip {
+      font-family: var(--font-tech);
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.25rem 0.6rem;
+      transform: skewX(var(--skew-deg));
+    }
+
+    .chip-yellow { background: var(--zzz-yellow); color: #000; }
+    .chip-cyan { background: var(--zzz-cyan); color: #000; }
+    .chip-dark { background: rgba(255, 255, 255, 0.08); color: #fff; border: 1px solid var(--border-subtle); }
+
+    .quote-banner {
+      background: var(--bg-panel-alt);
+      border-left: 4px solid var(--zzz-yellow);
+      padding: 1rem 1.25rem;
+      font-size: 0.95rem;
+      color: #e2e4ed;
+      line-height: 1.6;
+    }
+
+    .quote-banner strong {
+      color: var(--zzz-yellow);
+    }
+
+    /* 4-Item Quick Stats */
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.75rem;
+    }
+
+    .metric-cell {
+      background: var(--bg-panel-alt);
+      border: 1px solid var(--border-subtle);
+      padding: 0.75rem;
+    }
+
+    .metric-tit {
+      font-family: var(--font-tech);
+      font-size: 0.68rem;
+      color: var(--text-muted);
+      font-weight: 700;
+    }
+
+    .metric-val {
+      font-family: var(--font-tech);
+      font-size: 1.25rem;
+      font-weight: 800;
+      margin-top: 0.2rem;
+    }
+
+    .actions-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 0.5rem;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-tech);
+      font-weight: 700;
+      font-size: 0.9rem;
+      padding: 0.75rem 1.4rem;
+      cursor: pointer;
+      text-decoration: none;
+      border: none;
+      transform: skewX(var(--skew-deg));
+      transition: all 0.15s ease;
+      user-select: none;
+    }
+
+    .btn-primary {
+      background: var(--zzz-yellow);
+      color: #000;
+      box-shadow: 3px 3px 0px #fff;
+    }
+
+    .btn-primary:hover {
+      box-shadow: 5px 5px 0px #fff, 0 0 15px var(--zzz-yellow-glow);
+      transform: skewX(var(--skew-deg)) translate(-2px, -2px);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      border: 1px solid var(--zzz-cyan);
+      color: var(--zzz-cyan);
+      box-shadow: 3px 3px 0px var(--zzz-cyan);
+    }
+
+    .btn-secondary:hover {
+      background: var(--zzz-cyan);
+      color: #000;
+      box-shadow: 4px 4px 0px #fff;
+      transform: skewX(var(--skew-deg)) translate(-2px, -2px);
+    }
+
+    /* ==========================================================================
+       SECTION 2: AGENT SKILLS & MATRIX (ORGANIZED 2-COL)
+       ========================================================================== */
+    .skills-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .sub-panel {
+      background: var(--bg-panel-alt);
+      border: 1px solid var(--border-subtle);
+      padding: 1.5rem;
+    }
+
+    .sub-panel-title {
+      font-family: var(--font-tech);
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--zzz-yellow);
+      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1.25rem;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .passive-card {
+      display: flex;
+      gap: 0.85rem;
+      margin-bottom: 1.25rem;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 0.85rem;
+    }
+
+    .passive-icon {
+      font-size: 1.5rem;
+      line-height: 1;
+    }
+
+    .passive-tit {
+      font-family: var(--font-tech);
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: #fff;
+      margin-bottom: 0.2rem;
+    }
+
+    .passive-txt {
+      font-size: 0.82rem;
+      color: var(--text-gray);
+      line-height: 1.5;
+    }
+
+    .passive-txt strong {
+      color: var(--zzz-yellow);
+    }
+
+    /* Matrix Bars */
+    .matrix-row {
+      margin-bottom: 1rem;
+    }
+
+    .matrix-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.82rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .matrix-name {
+      color: #e2e4ed;
+    }
+
+    .matrix-num {
+      font-family: var(--font-tech);
+      font-weight: 700;
+      color: var(--zzz-yellow);
+    }
+
+    .matrix-track {
+      width: 100%;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.08);
+      overflow: hidden;
+    }
+
+    .matrix-fill {
+      height: 100%;
+      background: var(--zzz-yellow);
+      box-shadow: 0 0 8px var(--zzz-yellow-glow);
+    }
+
+    .fill-cyan {
+      background: var(--zzz-cyan);
+      box-shadow: 0 0 8px var(--zzz-cyan-glow);
+    }
+
+    /* ==========================================================================
+       SECTION 3: BOUNTY VAULT (CLEAN GRID GALLERY)
+       ========================================================================== */
+    .gallery-filter-bar {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .f-btn {
+      background: var(--bg-panel-alt);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-gray);
+      font-family: var(--font-tech);
+      font-weight: 700;
+      font-size: 0.8rem;
+      padding: 0.45rem 1rem;
+      cursor: pointer;
+      transform: skewX(var(--skew-deg));
+      transition: all 0.15s ease;
+    }
+
+    .f-btn:hover, .f-btn.active {
+      background: var(--zzz-yellow);
+      color: #000;
+      border-color: var(--zzz-yellow);
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .art-card {
+      background: var(--bg-panel-alt);
+      border: 1px solid var(--border-subtle);
+      cursor: pointer;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+      position: relative;
+    }
+
+    .art-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--zzz-yellow);
+      box-shadow: 6px 6px 0px var(--zzz-yellow);
+    }
+
+    .art-img-box {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+      background: #000;
+      position: relative;
+    }
+
+    .art-img-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .art-card:hover .art-img-box img {
+      transform: scale(1.05);
+    }
+
+    .art-tag-float {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      font-family: var(--font-tech);
+      font-size: 0.7rem;
+      font-weight: 800;
+      background: var(--zzz-red);
+      color: #fff;
+      padding: 0.15rem 0.45rem;
+    }
+
+    .art-tag-gold {
+      background: var(--zzz-yellow);
+      color: #000;
+    }
+
+    .art-details {
+      padding: 1rem;
+    }
+
+    .art-tit {
+      font-family: var(--font-tech);
+      font-weight: 800;
+      font-size: 1.05rem;
+      color: #fff;
+      margin-bottom: 0.35rem;
+    }
+
+    .art-desc {
+      font-size: 0.82rem;
+      color: var(--text-gray);
+      line-height: 1.4;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    /* ==========================================================================
+       SECTION 4: FEEDING & COMMISSION PRICING
+       ========================================================================== */
+    .tier-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .tier-box {
+      background: var(--bg-panel-alt);
+      border: 1px solid var(--border-subtle);
+      padding: 1.75rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: border-color 0.2s ease;
+    }
+
+    .tier-box.highlight {
+      border: 2px solid var(--zzz-yellow);
+      box-shadow: 0 0 20px rgba(232, 255, 0, 0.15);
+      background: #171b29;
+    }
+
+    .tier-badge {
+      font-family: var(--font-tech);
+      font-size: 0.7rem;
+      font-weight: 800;
+      color: var(--zzz-cyan);
+      margin-bottom: 0.4rem;
+    }
+
+    .highlight .tier-badge {
+      color: var(--zzz-yellow);
+    }
+
+    .tier-name {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+    }
+
+    .tier-price-row {
+      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 1rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .tier-cost {
+      font-family: var(--font-tech);
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: #fff;
+    }
+
+    .tier-equiv {
+      font-family: var(--font-tech);
+      font-size: 0.78rem;
+      color: var(--zzz-cyan);
+    }
+
+    .tier-items {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      font-size: 0.85rem;
+      color: var(--text-gray);
+      margin-bottom: 1.5rem;
+      flex-grow: 1;
+    }
+
+    .tier-items strong {
+      color: #fff;
+    }
+
+    /* Interactive Calculator Sub-Panel */
+    .calc-compact-box {
+      background: #11131a;
+      border: 1px solid var(--border-bright);
+      padding: 1.5rem;
+    }
+
+    .calc-tit {
+      font-family: var(--font-tech);
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--zzz-yellow);
+      margin-bottom: 1rem;
+    }
+
+    .food-buttons-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .food-btn {
+      background: var(--bg-panel-alt);
+      border: 1px solid var(--border-subtle);
+      padding: 0.85rem 0.5rem;
+      text-align: center;
+      cursor: pointer;
+      user-select: none;
+      position: relative;
+      transition: all 0.15s ease;
+    }
+
+    .food-btn:hover {
+      border-color: var(--zzz-yellow);
+      background: rgba(232, 255, 0, 0.05);
+    }
+
+    .food-emoji { font-size: 1.8rem; margin-bottom: 0.25rem; }
+    .food-name { font-family: var(--font-tech); font-size: 0.85rem; font-weight: 700; color: #fff; }
+    .food-price { font-family: var(--font-tech); font-size: 0.75rem; color: var(--zzz-cyan); }
+    .food-count {
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      background: var(--zzz-yellow);
+      color: #000;
+      font-family: var(--font-tech);
+      font-size: 0.7rem;
+      font-weight: 900;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0.25;
+    }
+    .food-btn.selected .food-count { opacity: 1; }
+
+    .calc-summary-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 1rem;
+    }
+
+    .calc-total-txt {
+      font-family: var(--font-tech);
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: var(--zzz-yellow);
+    }
+
+    .calc-buff-status {
+      font-size: 0.85rem;
+      color: var(--text-gray);
+      font-style: italic;
+      max-width: 500px;
+    }
+
+    /* ==========================================================================
+       SECTION 5: INTER-KNOT COMMISSION FORM
+       ========================================================================== */
+    .form-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .f-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .f-label {
+      font-family: var(--font-tech);
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #d1d5db;
+    }
+
+    .f-input {
+      background: #10121a;
+      border: 1px solid #2e3347;
+      color: #fff;
+      padding: 0.75rem 0.9rem;
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+
+    .f-input:focus {
+      border-color: var(--zzz-yellow);
+      box-shadow: 0 0 8px var(--zzz-yellow-glow);
+    }
+
+    .form-bottom-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 0.5rem;
+    }
+
+    /* ==========================================================================
+       LIGHTBOX & SUCCESS MODALS
+       ========================================================================== */
+    .modal-wrap {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+
+    .modal-wrap.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-bg {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.88);
+      backdrop-filter: blur(6px);
+    }
+
+    .modal-box {
+      position: relative;
+      z-index: 2;
+      background: #111420;
+      border: 2px solid var(--zzz-yellow);
+      box-shadow: 0 0 35px rgba(0, 0, 0, 0.8);
+      max-width: 900px;
+      width: 90%;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 1.75rem;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: #000;
+      color: var(--zzz-yellow);
+      border: 1px solid var(--zzz-yellow);
+      font-family: var(--font-tech);
+      font-size: 0.8rem;
+      font-weight: 800;
+      padding: 0.25rem 0.65rem;
+      cursor: pointer;
+    }
+
+    .modal-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.75rem;
+      align-items: center;
+    }
+
+    .modal-img-wrap {
+      background: #000;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .modal-img-wrap img {
+      width: 100%;
+      display: block;
+    }
+
+    /* Toast Container */
+    .toast-box {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      z-index: 10002;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      pointer-events: none;
+    }
+
+    .toast-item {
+      background: #11131c;
+      color: #fff;
+      border-left: 4px solid var(--zzz-yellow);
+      border-top: 1px solid var(--border-subtle);
+      border-right: 1px solid var(--border-subtle);
+      border-bottom: 1px solid var(--border-subtle);
+      font-family: var(--font-tech);
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 0.5rem 0.85rem;
+      box-shadow: 3px 3px 0 #000;
+    }
+
+    /* Coin Particle */
+    .coin-effect-wrap {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 99999;
+    }
+
+    .flying-coin {
+      position: absolute;
+      font-family: var(--font-tech);
+      font-size: 1.4rem;
+      font-weight: 900;
+      color: var(--zzz-yellow);
+      text-shadow: 0 0 10px var(--zzz-yellow);
+      animation: coinFly 1s ease-out forwards;
+    }
+
+    @keyframes coinFly {
+      0% { transform: translateY(0) scale(0.8); opacity: 1; }
+      100% { transform: translateY(-100px) scale(1.3); opacity: 0; }
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 900px) {
+      .profile-grid { grid-template-columns: 1fr; }
+      .skills-layout { grid-template-columns: 1fr; }
+      .tier-cards-grid { grid-template-columns: 1fr; }
+      .modal-layout { grid-template-columns: 1fr; }
+      .food-buttons-grid { grid-template-columns: repeat(2, 1fr); }
+      .metric-grid { grid-template-columns: repeat(2, 1fr); }
+      .form-grid-2 { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body class="crt-enabled">
+  <!-- CRT Screen Filter Layer -->
+  <div class="crt-overlay" id="crtOverlay"></div>
+
+  <!-- Top Slim Hazard Stripe -->
+  <div class="hazard-stripe-top"></div>
+
+  <!-- Top Status HUD Bar -->
+  <header class="hud-bar">
+    <div class="hud-bar-container">
+      <div class="hud-left">
+        <div class="zzz-badge">Z.Z.Z</div>
+        <div class="hud-proxy-info">
+          <div class="hud-id">INTER-KNOT ID: YYQ-099-BEGGAR</div>
+          <div class="hud-name">嚴幼喬 <span>[ 唯一指定：帥哥 ]</span></div>
+        </div>
+      </div>
+
+      <div class="hud-right">
+        <div class="hud-stat-pill pill-red">
+          <span>⚠️ 飢餓度：99%</span>
+        </div>
+        <div class="hud-stat-pill pill-yellow" id="coinTipBtn" title="點擊投幣投餵！">
+          <span>🪙 丁尼：<strong id="denniesCounter">0</strong> ₮</span>
+        </div>
+        <button class="hud-btn" id="sfxBtn">🔊 SFX: ON</button>
+        <button class="hud-btn" id="crtBtn">📺 CRT: ON</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Clear Channel Navigation Tabs (切換頻道，乾淨俐落) -->
+  <div class="channel-nav-container">
+    <nav class="channel-tabs" id="channelTabs">
+      <a href="#overview" class="tab-btn active"><span class="tab-num">01</span> 特工檔案 PROFILE</a>
+      <a href="#stats" class="tab-btn"><span class="tab-num">02</span> 作畫屬性 STATS</a>
+      <a href="#vault" class="tab-btn"><span class="tab-num">03</span> 委託畫廊 BOUNTY</a>
+      <a href="#menu" class="tab-btn"><span class="tab-num">04</span> 投餵價目 MENU</a>
+      <a href="#dispatch" class="tab-btn"><span class="tab-num">05</span> 繩網委託 COMM</a>
+    </nav>
+  </div>
+
+  <main class="main-wrapper">
+
+    <!-- BLOCK 1: AGENT DOSSIER / OVERVIEW -->
+    <section class="content-block" id="overview">
+      <div class="block-header">
+        <div class="block-title-wrap">
+          <span class="block-tag">PROXY FILE #01</span>
+          <h2 class="block-title">特工簡介 <span>// AGENT DOSSIER</span></h2>
+        </div>
+        <span class="block-code">STATUS: STARVING // READY TO DRAW</span>
+      </div>
+
+      <div class="block-body">
+        <div class="profile-grid">
+          
+          <!-- Left Character Card -->
+          <div class="agent-card-wrap">
+            <div class="agent-card" id="heroCard">
+              <div class="agent-img-box">
+                <img src="assets/images/avatar.jpg" alt="帥哥 嚴幼喬 2D繪師特工立繪" id="heroImg">
+              </div>
+              <div class="agent-card-footer">
+                <span style="color:#e8ff00; font-weight:700;">SPEC: 2D-ILLUSTRATOR</span>
+                <span class="rank-badge">S-RANK</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Information Dossier -->
+          <div class="dossier-info">
+            <div class="dossier-headline">
+              <span class="dossier-subtitle">NEW ERIDU S-RANK FREELANCER</span>
+              <h1 class="dossier-name">嚴幼喬 <span>/ 帥哥</span></h1>
+              <div class="tag-row">
+                <span class="tag-chip chip-yellow">專業領域：2D 概念繪師</span>
+                <span class="tag-chip chip-cyan">當前職業：新艾利都乞丐</span>
+                <span class="tag-chip chip-dark">專屬稱呼：帥哥</span>
+              </div>
+            </div>
+
+            <div class="quote-banner">
+              「請給我一碗熱騰騰的拉麵，或者給我一個好委託。<br>
+              錢包存款雖然是 <strong>0 丁尼</strong>，但我的畫筆手速與帥氣度永遠在<strong>超載極限狀態</strong>！」
+            </div>
+
+            <!-- Quick Metrics Grid -->
+            <div class="metric-grid">
+              <div class="metric-cell">
+                <div class="metric-tit">帥氣指數</div>
+                <div class="metric-val" style="color:var(--zzz-yellow);">MAX</div>
+              </div>
+              <div class="metric-cell">
+                <div class="metric-tit">作畫手速</div>
+                <div class="metric-val" style="color:var(--zzz-cyan);">420 RPM</div>
+              </div>
+              <div class="metric-cell">
+                <div class="metric-tit">飽足狀態</div>
+                <div class="metric-val" style="color:var(--zzz-red);">極度飢餓</div>
+              </div>
+              <div class="metric-cell">
+                <div class="metric-tit">丁尼餘額</div>
+                <div class="metric-val">0 ₮</div>
+              </div>
+            </div>
+
+            <div class="actions-row">
+              <a href="#menu" class="btn btn-primary" data-sfx="accept">🍜 投餵方案 / 委託畫稿</a>
+              <a href="#vault" class="btn btn-secondary" data-sfx="click">🎨 檢閱作品數據庫</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- BLOCK 2: STATS & PASSIVES -->
+    <section class="content-block" id="stats">
+      <div class="block-header">
+        <div class="block-title-wrap">
+          <span class="block-tag">ATTRIBUTES</span>
+          <h2 class="block-title">作畫屬性 <span>&amp; 生存被動</span></h2>
+        </div>
+        <span class="block-code">CALIBRATION: 100% PASS</span>
+      </div>
+
+      <div class="block-body">
+        <div class="skills-layout">
+          
+          <!-- Combat Passives -->
+          <div class="sub-panel">
+            <div class="sub-panel-title">
+              <span>戰鬥被動 / PASSIVE SKILLS</span>
+              <span style="color:var(--zzz-cyan);">PHYSICAL // GRAFFITI</span>
+            </div>
+
+            <div class="passive-card">
+              <div class="passive-icon">🔥</div>
+              <div>
+                <div class="passive-tit">核心被動：【空腹狂暴・極限爆肝】</div>
+                <div class="passive-txt">飢餓度高於 90% 時，作畫速度提升 <strong>250%</strong>，線條銳利度提高 <strong>40%</strong>。</div>
+              </div>
+            </div>
+
+            <div class="passive-card">
+              <div class="passive-icon">⚡</div>
+              <div>
+                <div class="passive-tit">特工技：【賽博潮酷・光影重擊】</div>
+                <div class="passive-txt">對角色立繪施加高飽和霓虹光影與幾何網點，委託人滿意度暴增。</div>
+              </div>
+            </div>
+
+            <div class="passive-card">
+              <div class="passive-icon">🍜</div>
+              <div>
+                <div class="passive-tit">終結技：【一碗入魂・神速完稿】</div>
+                <div class="passive-txt">委託人若主動請吃叉燒拉麵或燒肉便當，立即解鎖「神速交稿」狀態！</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Proficiency Matrix -->
+          <div class="sub-panel">
+            <div class="sub-panel-title">
+              <span>繪圖維度矩陣 / MATRIX</span>
+              <span style="color:var(--zzz-yellow);">PRECISION 99.8%</span>
+            </div>
+
+            <div class="matrix-row">
+              <div class="matrix-labels">
+                <span class="matrix-name">2D 角色概念設計 (Character Concept)</span>
+                <span class="matrix-num">98%</span>
+              </div>
+              <div class="matrix-track"><div class="matrix-fill" style="width: 98%;"></div></div>
+            </div>
+
+            <div class="matrix-row">
+              <div class="matrix-labels">
+                <span class="matrix-name">賽博潮酷街頭機能風格 (Streetwear & Tech)</span>
+                <span class="matrix-num">99%</span>
+              </div>
+              <div class="matrix-track"><div class="matrix-fill" style="width: 99%;"></div></div>
+            </div>
+
+            <div class="matrix-row">
+              <div class="matrix-labels">
+                <span class="matrix-name">動態張力構圖 & 漫畫網點 (Key Visual)</span>
+                <span class="matrix-num">95%</span>
+              </div>
+              <div class="matrix-track"><div class="matrix-fill" style="width: 95%;"></div></div>
+            </div>
+
+            <div class="matrix-row">
+              <div class="matrix-labels">
+                <span class="matrix-name">街頭生存乞討本能 (Survival Instinct)</span>
+                <span class="matrix-num">100%</span>
+              </div>
+              <div class="matrix-track"><div class="matrix-fill fill-cyan" style="width: 100%;"></div></div>
+            </div>
+
+            <div class="matrix-row">
+              <div class="matrix-labels">
+                <span class="matrix-name">本人容顏帥氣自覺 (Handsome Factor)</span>
+                <span class="matrix-num">999%</span>
+              </div>
+              <div class="matrix-track"><div class="matrix-fill" style="width: 100%;"></div></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- BLOCK 3: BOUNTY VAULT / GALLERY -->
+    <section class="content-block" id="vault">
+      <div class="block-header">
+        <div class="block-title-wrap">
+          <span class="block-tag">ARCHIVES</span>
+          <h2 class="block-title">委託戰利品庫 <span>// BOUNTY VAULT</span></h2>
+        </div>
+        <span class="block-code">點擊卡片展開情報特寫</span>
+      </div>
+
+      <div class="block-body">
+        <!-- Clean Filter Buttons -->
+        <div class="gallery-filter-bar">
+          <button class="f-btn active" data-filter="all">全部展示 / ALL</button>
+          <button class="f-btn" data-filter="agent">特工立繪 / AGENT</button>
+          <button class="f-btn" data-filter="humor">乞討日常 / MEME</button>
+          <button class="f-btn" data-filter="concept">概念設計 / CONCEPT</button>
+        </div>
+
+        <div class="gallery-grid">
+          
+          <!-- Card 1 -->
+          <div class="art-card" data-category="humor" data-art-id="ramen">
+            <div class="art-img-box">
+              <span class="art-tag-float">S-RANK</span>
+              <img src="assets/images/art_ramen.jpg" alt="飢餓畫師與邦布拉麵日常" loading="lazy">
+            </div>
+            <div class="art-details">
+              <div class="art-tit">【乞討日常】WILL DRAW FOR RAMEN</div>
+              <div class="art-desc">在六分街暗巷塑膠箱上高速產出的帥哥幼喬。只要有一碗泡麵與好心邦布，手速就永不停止！</div>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="art-card" data-category="agent" data-art-id="rebel">
+            <div class="art-img-box">
+              <span class="art-tag-float">S-RANK</span>
+              <img src="assets/images/art_rebel.jpg" alt="雙刃突襲 街區斬擊 S級特工插畫" loading="lazy">
+            </div>
+            <div class="art-details">
+              <div class="art-tit">【空洞突襲】SHADOW SLICER</div>
+              <div class="art-desc">極具透視爆發力的戰鬥插畫。雙馬尾刺客在破壞的霓虹街區中撕裂以太虛影，漫畫風爆破文字。</div>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="art-card" data-category="concept" data-art-id="sniper">
+            <div class="art-img-box">
+              <span class="art-tag-float">S-RANK</span>
+              <img src="assets/images/art_sniper.jpg" alt="白髮機械臂狙擊手概念設計" loading="lazy">
+            </div>
+            <div class="art-details">
+              <div class="art-tit">【特工立繪】KAELEN // CYBER SNIPER</div>
+              <div class="art-desc">白髮半機械狙擊手與塗鴉邦布同伴，坐在老舊 CRT 電視堆上的街頭概念立繪。</div>
+            </div>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="art-card" data-category="concept" data-art-id="avatar">
+            <div class="art-img-box">
+              <span class="art-tag-float art-tag-gold">EX-RANK</span>
+              <img src="assets/images/avatar.jpg" alt="帥哥幼喬特工身份卡" loading="lazy">
+            </div>
+            <div class="art-details">
+              <div class="art-tit">【本尊檔案】YAN YOU-QIAO // 帥哥</div>
+              <div class="art-desc">新艾利都無人不知的頂級帥哥畫師。身穿安全警示黃黑條紋夾克，電繪筆隨時待命。</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- BLOCK 4: FEEDING & COMMISSION MENU -->
+    <section class="content-block" id="menu">
+      <div class="block-header">
+        <div class="block-title-wrap">
+          <span class="block-tag">REWARDS</span>
+          <h2 class="block-title">投餵乞討價目表 <span>// PRICING</span></h2>
+        </div>
+        <span class="block-code">丁尼與伙食兌換方案</span>
+      </div>
+
+      <div class="block-body">
+        <!-- 3 Tiers -->
+        <div class="tier-cards-grid">
+          
+          <div class="tier-box">
+            <div class="tier-badge">TIER 01 / 救命溫飽</div>
+            <div class="tier-name">熱騰騰拉麵級</div>
+            <div class="tier-price-row">
+              <div class="tier-cost">NT$ 150</div>
+              <div class="tier-equiv">/ 1,500 丁尼 (或一碗叉燒麵)</div>
+            </div>
+            <ul class="tier-items">
+              <li>✓ <strong>精緻黑白草稿速寫 / 摸魚頭像</strong></li>
+              <li>✓ 24 小時極速出圖</li>
+              <li>✓ 嚴幼喬誠摯的帥氣感謝</li>
+            </ul>
+            <button class="btn btn-secondary select-tier-btn" data-tier="拉麵級 (NT$ 150)">選擇此方案</button>
+          </div>
+
+          <div class="tier-box highlight">
+            <div class="tier-badge">TIER 02 / 體力充沛 (最推薦)</div>
+            <div class="tier-name">雙倍燒肉便當級</div>
+            <div class="tier-price-row">
+              <div class="tier-cost">NT$ 600</div>
+              <div class="tier-equiv">/ 6,000 丁尼 (可加溫泉蛋)</div>
+            </div>
+            <ul class="tier-items">
+              <li>✓ <strong>全彩精緻半身角色立繪</strong></li>
+              <li>✓ 絕區零潮酷街頭光影 & 幾何網點</li>
+              <li>✓ 免費微調修改 2 次</li>
+            </ul>
+            <button class="btn btn-primary select-tier-btn" data-tier="雙倍燒肉便當級 (NT$ 600)">選擇此方案</button>
+          </div>
+
+          <div class="tier-box">
+            <div class="tier-badge">TIER 03 / 奢華盛宴</div>
+            <div class="tier-name">豪華滿漢全席級</div>
+            <div class="tier-price-row">
+              <div class="tier-cost">NT$ 2,500+</div>
+              <div class="tier-equiv">/ 25,000+ 丁尼 (吃到飽火鍋)</div>
+            </div>
+            <ul class="tier-items">
+              <li>✓ <strong>S級商業宣傳插畫 / 全身角色立繪</strong></li>
+              <li>✓ 炸裂透視背景 + 完整 PSD 原始檔</li>
+              <li>✓ 商業授權 + 專屬特工認證簽名</li>
+            </ul>
+            <button class="btn btn-secondary select-tier-btn" data-tier="滿漢全席級 (NT$ 2,500+)">選擇此方案</button>
+          </div>
+
+        </div>
+
+        <!-- Compact Interactive Calculator -->
+        <div class="calc-compact-box">
+          <div class="calc-tit">🍜 投餵熱量試算機 // FEED CALCULATOR</div>
+          <div class="food-buttons-grid">
+            <div class="food-btn" data-item="coffee" data-price="60">
+              <div class="food-emoji">☕</div>
+              <div class="food-name">冰美式咖啡</div>
+              <div class="food-price">+NT$ 60</div>
+              <div class="food-count" id="c-coffee">0</div>
+            </div>
+            <div class="food-btn" data-item="ramen" data-price="180">
+              <div class="food-emoji">🍜</div>
+              <div class="food-name">叉燒拉麵</div>
+              <div class="food-price">+NT$ 180</div>
+              <div class="food-count" id="c-ramen">0</div>
+            </div>
+            <div class="food-btn" data-item="bento" data-price="350">
+              <div class="food-emoji">🍱</div>
+              <div class="food-name">炸牛排便當</div>
+              <div class="food-price">+NT$ 350</div>
+              <div class="food-count" id="c-bento">0</div>
+            </div>
+            <div class="food-btn" data-item="feast" data-price="1200">
+              <div class="food-emoji">🥩</div>
+              <div class="food-name">和牛吃到飽</div>
+              <div class="food-price">+NT$ 1,200</div>
+              <div class="food-count" id="c-feast">0</div>
+            </div>
+          </div>
+
+          <div class="calc-summary-row">
+            <div>
+              <div style="font-family:var(--font-tech); font-size:0.75rem; color:var(--text-muted);">累計價值 / TOTAL</div>
+              <div class="calc-total-txt" id="calcTotal">NT$ 0</div>
+            </div>
+            <div class="calc-buff-status" id="calcBuff">「目前坐在路邊看天空嘆氣...快點點選上方伙食！」</div>
+            <button class="btn btn-secondary" id="applyCalcBtn">帶入委託表單 ➔</button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- BLOCK 5: INTER-KNOT COMMISSION TERMINAL -->
+    <section class="content-block" id="dispatch">
+      <div class="block-header">
+        <div class="block-title-wrap">
+          <span class="block-tag">TERMINAL</span>
+          <h2 class="block-title">繩網委託發布 <span>// DISPATCH</span></h2>
+        </div>
+        <span class="block-code">DIRECT ENCRYPTED COMMS</span>
+      </div>
+
+      <div class="block-body">
+        <form id="commForm">
+          <div class="form-grid-2">
+            <div class="f-group">
+              <label class="f-label" for="clientName">[01] 委託人代號 / PROXY CODENAME *</label>
+              <input type="text" id="clientName" class="f-input" placeholder="例如：六分街好心繩匠" required>
+            </div>
+            <div class="f-group">
+              <label class="f-label" for="clientContact">[02] 聯絡方式 / EMAIL OR DISCORD *</label>
+              <input type="text" id="clientContact" class="f-input" placeholder="youremail@example.com" required>
+            </div>
+          </div>
+
+          <div class="form-grid-2">
+            <div class="f-group">
+              <label class="f-label" for="commType">[03] 委託類型 / TASK TYPE</label>
+              <select id="commType" class="f-input" style="cursor:pointer;">
+                <option value="摸魚頭像 / 塗鴉速寫 (拉麵級)">摸魚頭像 / 塗鴉速寫 (拉麵級)</option>
+                <option value="全彩街頭潮酷角色半身立繪 (便當級)" selected>全彩街頭潮酷角色半身立繪 (便當級)</option>
+                <option value="S級原創角色設計 / 宣傳插畫 (滿漢全席級)">S級原創角色設計 / 宣傳插畫 (滿漢全席級)</option>
+                <option value="純粹請帥哥幼喬吃頓好料">無需求！純粹請帥哥幼喬吃頓好料</option>
+              </select>
+            </div>
+            <div class="f-group">
+              <label class="f-label" for="budget">[04] 投餵預算 / BUDGET</label>
+              <input type="text" id="budget" class="f-input" placeholder="例如：NT$ 600 或 兩碗叉燒麵">
+            </div>
+          </div>
+
+          <div class="f-group">
+            <label class="f-label" for="details">[05] 任務需求簡述 / MISSION BRIEF *</label>
+            <textarea id="details" class="f-input" rows="4" placeholder="請描述角色特徵、風格偏好、截稿日期..." required></textarea>
+          </div>
+
+          <div class="form-bottom-row">
+            <div style="font-size:0.8rem; color:var(--text-muted);">
+              ⚠️ 發送此信號將可能拯救一名正在翻找零錢的帥哥繪師。
+            </div>
+            <button type="submit" class="btn btn-primary" id="submitBtn">
+              🚀 發送繩網委託信號
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- LIGHTBOX MODAL -->
+  <div class="modal-wrap" id="artModal">
+    <div class="modal-bg" id="modalBg"></div>
+    <div class="modal-box">
+      <button class="modal-close" id="modalClose">✕ ESC</button>
+      <div class="modal-layout">
+        <div class="modal-img-wrap">
+          <img src="" alt="" id="modalImg">
+        </div>
+        <div>
+          <div style="font-family:var(--font-tech); color:var(--zzz-yellow); font-size:0.8rem; font-weight:700;" id="modalRank">S-RANK</div>
+          <h3 style="font-family:var(--font-display); font-size:1.4rem; margin:0.3rem 0 0.8rem 0;" id="modalTitle">作品名稱</h3>
+          <p style="font-size:0.88rem; color:var(--text-gray); line-height:1.6; margin-bottom:1.5rem;" id="modalDesc">作品詳細說明</p>
+          <a href="#dispatch" class="btn btn-primary" id="modalHireBtn" style="font-size:0.85rem;">👉 以此風格委託</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUCCESS BANGBOO MODAL -->
+  <div class="modal-wrap" id="successModal">
+    <div class="modal-bg" id="successBg"></div>
+    <div class="modal-box" style="max-width:440px; text-align:center;">
+      <div style="font-size:3rem; margin-bottom:0.5rem;">🤖 🍜</div>
+      <h3 style="font-family:var(--font-display); font-size:1.35rem; color:var(--zzz-yellow); margin-bottom:0.5rem;">
+        【繩網委託接收成功！】
+      </h3>
+      <p style="font-size:0.88rem; color:var(--text-gray); line-height:1.6; margin-bottom:1.25rem;">
+        訊號已送達！帥哥嚴幼喬正在擦拭電繪筆，並將最後一口湯喝完。<br>他會在最短時間內與你回覆！
+      </p>
+      <button class="btn btn-primary" id="successClose">收到，辛苦了！</button>
+    </div>
+  </div>
+
+  <!-- TOAST CONTAINER & COIN EFFECT -->
+  <div class="toast-box" id="toastBox"></div>
+  <div class="coin-effect-wrap" id="coinWrap"></div>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    (function () {
+      'use strict';
+
+      // 1. Audio Engine
+      let audioCtx = null;
+      let sfxOn = true;
+
+      function playSound(type) {
+        if (!sfxOn) return;
+        try {
+          if (!audioCtx) {
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+          }
+          if (audioCtx.state === 'suspended') audioCtx.resume();
+          const t = audioCtx.currentTime;
+
+          if (type === 'click') {
+            const osc = audioCtx.createOscillator();
+            const g = audioCtx.createGain();
+            osc.frequency.setValueAtTime(800, t);
+            osc.frequency.exponentialRampToValueAtTime(300, t + 0.05);
+            g.gain.setValueAtTime(0.1, t);
+            g.gain.exponentialRampToValueAtTime(0.01, t + 0.05);
+            osc.connect(g); g.connect(audioCtx.destination);
+            osc.start(t); osc.stop(t + 0.05);
+          } else if (type === 'coin') {
+            const osc = audioCtx.createOscillator();
+            const g = audioCtx.createGain();
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(987, t);
+            osc.frequency.setValueAtTime(1318, t + 0.08);
+            g.gain.setValueAtTime(0.15, t);
+            g.gain.exponentialRampToValueAtTime(0.01, t + 0.3);
+            osc.connect(g); g.connect(audioCtx.destination);
+            osc.start(t); osc.stop(t + 0.3);
+          } else if (type === 'accept') {
+            const osc = audioCtx.createOscillator();
+            const g = audioCtx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(587, t);
+            osc.frequency.setValueAtTime(1174, t + 0.1);
+            g.gain.setValueAtTime(0.15, t);
+            g.gain.exponentialRampToValueAtTime(0.01, t + 0.25);
+            osc.connect(g); g.connect(audioCtx.destination);
+            osc.start(t); osc.stop(t + 0.25);
+          }
+        } catch(e) {}
+      }
+
+      // 2. Toast Notification
+      const toastBox = document.getElementById('toastBox');
+      function showToast(msg) {
+        const item = document.createElement('div');
+        item.className = 'toast-item';
+        item.innerText = msg;
+        toastBox.appendChild(item);
+        setTimeout(() => {
+          item.style.opacity = '0';
+          setTimeout(() => item.remove(), 300);
+        }, 2500);
+      }
+
+      // 3. Toggles: SFX & CRT
+      const sfxBtn = document.getElementById('sfxBtn');
+      const crtBtn = document.getElementById('crtBtn');
+      sfxBtn.addEventListener('click', () => {
+        sfxOn = !sfxOn;
+        sfxBtn.innerText = sfxOn ? '🔊 SFX: ON' : '🔇 SFX: OFF';
+        if (sfxOn) playSound('accept');
+        showToast(sfxOn ? '音效已開啟' : '音效已靜音');
+      });
+
+      crtBtn.addEventListener('click', () => {
+        document.body.classList.toggle('crt-enabled');
+        const isCrt = document.body.classList.contains('crt-enabled');
+        crtBtn.innerText = isCrt ? '📺 CRT: ON' : '📺 CRT: OFF';
+        playSound('click');
+      });
+
+      // 4. Coin Tapping Easter Egg
+      const coinBtn = document.getElementById('coinTipBtn');
+      const denniesEl = document.getElementById('denniesCounter');
+      const coinWrap = document.getElementById('coinWrap');
+      let dennies = 0;
+
+      coinBtn.addEventListener('click', (e) => {
+        dennies += 10;
+        denniesEl.innerText = dennies;
+        playSound('coin');
+
+        const coin = document.createElement('div');
+        coin.className = 'flying-coin';
+        coin.innerText = '+10 ₮';
+        const rect = coinBtn.getBoundingClientRect();
+        coin.style.left = `${rect.left + rect.width / 2}px`;
+        coin.style.top = `${rect.top}px`;
+        coinWrap.appendChild(coin);
+        setTimeout(() => coin.remove(), 1000);
+
+        if (dennies === 50) showToast('帥哥幼喬對你眨眼：「感謝老闆投餵！今天能加顆滷蛋了！」');
+      });
+
+      // 5. Channel Tab Switcher & Active Highlighting
+      const tabs = document.querySelectorAll('.tab-btn');
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          tabs.forEach(t => t.classList.remove('active'));
+          tab.classList.add('active');
+          playSound('click');
+        });
+      });
+
+      // 6. 3D Card Tilt Effect
+      const card = document.getElementById('heroCard');
+      if (card) {
+        card.addEventListener('mousemove', (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left - rect.width / 2;
+          const y = e.clientY - rect.top - rect.height / 2;
+          card.style.transform = `perspective(600px) rotateX(${-(y / 15)}deg) rotateY(${x / 15}deg)`;
+        });
+        card.addEventListener('mouseleave', () => {
+          card.style.transform = 'perspective(600px) rotateX(0) rotateY(0)';
+        });
+      }
+
+      // 7. Gallery Filter & Lightbox
+      const fBtns = document.querySelectorAll('.f-btn');
+      const artCards = document.querySelectorAll('.art-card');
+      fBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          fBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          playSound('click');
+          const filter = btn.dataset.filter;
+          artCards.forEach(c => {
+            c.style.display = (filter === 'all' || c.dataset.category === filter) ? 'block' : 'none';
+          });
+        });
+      });
+
+      const artData = {
+        ramen: {
+          title: '【乞討日常】WILL DRAW FOR RAMEN',
+          rank: 'S-RANK // MEME',
+          desc: '真實寫照！嚴幼喬在新艾利都六分街暗巷，坐在啤酒箱上狂按電繪筆，身後堆滿吃完的一蘭拉麵碗，好心邦布遞來丁尼。帥氣眼神堅定不移！',
+          img: 'assets/images/art_ramen.jpg'
+        },
+        rebel: {
+          title: '【空洞突襲】SHADOW SLICER',
+          rank: 'S-RANK // KEY VISUAL',
+          desc: '高張力透視戰鬥插畫。雙馬尾刺客在破壞的霓虹街區中撕裂以太虛影，漫畫風爆破文字震撼全場。',
+          img: 'assets/images/art_rebel.jpg'
+        },
+        sniper: {
+          title: '【特工立繪】KAELEN // CYBER SNIPER',
+          rank: 'S-RANK // CONCEPT',
+          desc: '白髮機械臂重裝特工概念設計。冷冽狙擊手肩負巨大電磁重炮，坐在老式 CRT 電視堆上，街頭潮牌機能風。',
+          img: 'assets/images/art_sniper.jpg'
+        },
+        avatar: {
+          title: '【本尊情報】YAN YOU-QIAO // 帥哥',
+          rank: 'EX-RANK // DOSSIER',
+          desc: '新艾利都傳奇街頭 2D 繪師嚴幼喬本人立繪。黑髮挑染螢光綠，身穿安全警示黃黑條紋夾克，電繪筆隨時待命。',
+          img: 'assets/images/avatar.jpg'
+        }
+      };
+
+      const artModal = document.getElementById('artModal');
+      const modalImg = document.getElementById('modalImg');
+      const modalTitle = document.getElementById('modalTitle');
+      const modalDesc = document.getElementById('modalDesc');
+      const modalRank = document.getElementById('modalRank');
+      const modalClose = document.getElementById('modalClose');
+      const modalBg = document.getElementById('modalBg');
+      const modalHireBtn = document.getElementById('modalHireBtn');
+
+      function openModal(id) {
+        const item = artData[id];
+        if (!item) return;
+        modalImg.src = item.img;
+        modalTitle.innerText = item.title;
+        modalDesc.innerText = item.desc;
+        modalRank.innerText = item.rank;
+        artModal.classList.add('active');
+        playSound('accept');
+      }
+
+      function closeModal() {
+        artModal.classList.remove('active');
+        playSound('click');
+      }
+
+      artCards.forEach(c => c.addEventListener('click', () => openModal(c.dataset.artId)));
+      modalClose.addEventListener('click', closeModal);
+      modalBg.addEventListener('click', closeModal);
+      modalHireBtn.addEventListener('click', closeModal);
+
+      // 8. Feeding Calculator
+      const foodBtns = document.querySelectorAll('.food-btn');
+      const counts = { coffee: 0, ramen: 0, bento: 0, feast: 0 };
+      const calcTotalEl = document.getElementById('calcTotal');
+      const calcBuffEl = document.getElementById('calcBuff');
+
+      foodBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const item = btn.dataset.item;
+          counts[item]++;
+          document.getElementById(`c-${item}`).innerText = counts[item];
+          btn.classList.add('selected');
+          playSound('click');
+          updateCalc();
+        });
+      });
+
+      function updateCalc() {
+        const total = counts.coffee * 60 + counts.ramen * 180 + counts.bento * 350 + counts.feast * 1200;
+        calcTotalEl.innerText = `NT$ ${total.toLocaleString()}`;
+
+        if (total === 0) {
+          calcBuffEl.innerText = '「目前坐在路邊看天空嘆氣...快點點選上方伙食！」';
+        } else if (total < 200) {
+          calcBuffEl.innerText = '【熱量回補中】解鎖黑白塗鴉速寫！幼喬眼中重新亮起帥氣光芒！';
+        } else if (total < 700) {
+          calcBuffEl.innerText = '【戰意狂飆】解鎖賽博潮酷全彩立繪！幼喬吃飽喝足，400 RPM 超速狂飆畫筆！';
+        } else {
+          calcBuffEl.innerText = '【S級神聖暴食光環】解鎖頂級商業插圖！帥哥幼喬願意為你連續爆肝三天三夜！';
+        }
+      }
+
+      document.getElementById('applyCalcBtn').addEventListener('click', () => {
+        const total = counts.coffee * 60 + counts.ramen * 180 + counts.bento * 350 + counts.feast * 1200;
+        if (total > 0) {
+          document.getElementById('budget').value = `NT$ ${total}`;
+          document.getElementById('details').value = `【投餵食物明細】：咖啡x${counts.coffee}、拉麵x${counts.ramen}、便當x${counts.bento}、和牛x${counts.feast}\n【委託需求】：`;
+        }
+        document.getElementById('dispatch').scrollIntoView({ behavior: 'smooth' });
+        showToast('伙食預算已帶入表單！');
+      });
+
+      // 9. Pricing Select Buttons
+      document.querySelectorAll('.select-tier-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const tier = btn.dataset.tier;
+          document.getElementById('budget').value = tier;
+          document.getElementById('dispatch').scrollIntoView({ behavior: 'smooth' });
+          showToast(`已選定：${tier}`);
+        });
+      });
+
+      // 10. Form Submission
+      const form = document.getElementById('commForm');
+      const sModal = document.getElementById('successModal');
+      const sClose = document.getElementById('successClose');
+      const sBg = document.getElementById('successBg');
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        playSound('accept');
+        sModal.classList.add('active');
+        form.reset();
+      });
+
+      function closeSuccess() {
+        sModal.classList.remove('active');
+        playSound('click');
+      }
+      sClose.addEventListener('click', closeSuccess);
+      sBg.addEventListener('click', closeSuccess);
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          closeModal();
+          closeSuccess();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
